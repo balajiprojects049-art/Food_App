@@ -24,6 +24,7 @@ import { Pages, SendNotifications } from './pages/promotions/PagesAndNotificatio
 import { ModulesPage, StoreTypes } from './pages/modules/ModulesPage';
 import { PickupDropSettings, DeliveryTimeSlots, DeliveryRadiusSchedules, PayoutSchedules } from './pages/modules/Schedules';
 import { Utilities, CustomDeliverySettings } from './pages/modules/UtilitiesAndDelivery';
+import { DeliveryGuyReport, StoreWiseReport, MostSoldItemsReport } from './pages/reports/ReportsPages';
 
 // Placeholder Pages
 const PlaceholderPage = ({ title }) => (
@@ -82,6 +83,9 @@ function App() {
             <Route path="modules/store-types" element={<StoreTypes />} />
             <Route path="modules/utilities" element={<Utilities />} />
             <Route path="modules/delivery-settings" element={<CustomDeliverySettings />} />
+            <Route path="reports/delivery-guys" element={<DeliveryGuyReport />} />
+            <Route path="reports/store-wise" element={<StoreWiseReport />} />
+            <Route path="reports/most-sold" element={<MostSoldItemsReport />} />
             <Route path="settings" element={<PlaceholderPage title="System Settings" />} />
             <Route path="logout" element={<PlaceholderPage title="Logging Out..." />} />
           </Route>

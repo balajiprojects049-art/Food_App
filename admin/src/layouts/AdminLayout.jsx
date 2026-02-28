@@ -87,7 +87,16 @@ export const AdminLayout = () => {
                 { key: '/promotions/notifications', label: <Link to="/promotions/notifications">Send Push Notifications</Link> },
             ]
         },
-        { key: '/reports', icon: <BarChartOutlined />, label: <Link to="/reports">Reports</Link> },
+        {
+            key: 'sub-reports',
+            icon: <BarChartOutlined />,
+            label: 'Reports',
+            children: [
+                { key: '/reports/delivery-guys', label: <Link to="/reports/delivery-guys">Delivery Guy Reports</Link> },
+                { key: '/reports/store-wise', label: <Link to="/reports/store-wise">Store-Wise Orders</Link> },
+                { key: '/reports/most-sold', label: <Link to="/reports/most-sold">Most Sold Items</Link> },
+            ]
+        },
         {
             key: 'sub-modules',
             icon: <AppstoreOutlined />,
