@@ -9,6 +9,11 @@ import { Items } from './pages/menu/Items';
 import { SubCategories } from './pages/menu/SubCategories';
 import { ItemAttributes } from './pages/menu/ItemAttributes';
 import { ItemSchedule } from './pages/menu/ItemSchedule';
+import { AllUsers } from './pages/users/AllUsers';
+import { Customers, StoreOwners, DeliveryGuys, Staff } from './pages/users/FilteredUsers';
+import { RolesPermissions } from './pages/users/RolesPermissions';
+import { AllOrders, CancelledOrders, RefundRequests, DisputedOrders, CODOrders, HighValueOrders, FraudFlaggedOrders, ScheduledOrders } from './pages/orders/AllOrders';
+import { LiveOrders } from './pages/orders/LiveOrders';
 
 // Placeholder Pages
 const PlaceholderPage = ({ title }) => (
@@ -30,10 +35,23 @@ function App() {
             <Route path="menu/sub-categories" element={<SubCategories />} />
             <Route path="menu/attributes" element={<ItemAttributes />} />
             <Route path="menu/schedule" element={<ItemSchedule />} />
-            <Route path="users" element={<PlaceholderPage title="User Management" />} />
+            <Route path="users/all" element={<AllUsers />} />
+            <Route path="users/customers" element={<Customers />} />
+            <Route path="users/store-owners" element={<StoreOwners />} />
+            <Route path="users/delivery" element={<DeliveryGuys />} />
+            <Route path="users/staff" element={<Staff />} />
+            <Route path="users/roles" element={<RolesPermissions />} />
             <Route path="partners" element={<PlaceholderPage title="Delivery Partners" />} />
             <Route path="orders" element={<PlaceholderPage title="Orders History" />} />
-            <Route path="transactions" element={<PlaceholderPage title="Transactions" />} />
+            <Route path="orders/all" element={<AllOrders />} />
+            <Route path="orders/live" element={<LiveOrders />} />
+            <Route path="orders/scheduled" element={<ScheduledOrders />} />
+            <Route path="orders/cancelled" element={<CancelledOrders />} />
+            <Route path="orders/refunds" element={<RefundRequests />} />
+            <Route path="orders/disputed" element={<DisputedOrders />} />
+            <Route path="orders/cod" element={<CODOrders />} />
+            <Route path="orders/high-value" element={<HighValueOrders />} />
+            <Route path="orders/fraud" element={<FraudFlaggedOrders />} />
             <Route path="promotions" element={<PlaceholderPage title="Promotions" />} />
             <Route path="reports" element={<PlaceholderPage title="Analytics Reports" />} />
             <Route path="settings" element={<PlaceholderPage title="System Settings" />} />

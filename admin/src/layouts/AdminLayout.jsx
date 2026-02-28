@@ -1,24 +1,11 @@
 import React, { useState } from 'react';
 import { Layout, Menu, Input, Select, Badge, Avatar, Dropdown, Space, Button, Breadcrumb } from 'antd';
 import {
-    DashboardOutlined,
-    ShopOutlined,
-    MenuOutlined,
-    UserOutlined,
-    CarOutlined,
-    ShoppingCartOutlined,
-    TransactionOutlined,
-    TagOutlined,
-    BarChartOutlined,
-    SettingOutlined,
-    LogoutOutlined,
-    BellOutlined,
-    SearchOutlined,
-    MenuUnfoldOutlined,
-    MenuFoldOutlined,
-    GlobalOutlined,
-    SunOutlined,
-    MoonOutlined
+    DashboardOutlined, ShopOutlined, MenuOutlined, UserOutlined,
+    ShoppingCartOutlined, TransactionOutlined, TagOutlined, BarChartOutlined,
+    SettingOutlined, LogoutOutlined, BellOutlined, SearchOutlined,
+    MenuUnfoldOutlined, MenuFoldOutlined, GlobalOutlined, SunOutlined, MoonOutlined,
+    TeamOutlined, SafetyOutlined, UserSwitchOutlined
 } from '@ant-design/icons';
 import { useTheme } from '../context/ThemeContext';
 import { Link, Outlet, useLocation } from 'react-router-dom';
@@ -45,9 +32,35 @@ export const AdminLayout = () => {
                 { key: '/menu/schedule', label: <Link to="/menu/schedule">Item Schedule</Link> },
             ]
         },
-        { key: '/users', icon: <UserOutlined />, label: <Link to="/users">Users</Link> },
-        { key: '/partners', icon: <CarOutlined />, label: <Link to="/partners">Delivery Partners</Link> },
-        { key: '/orders', icon: <ShoppingCartOutlined />, label: <Link to="/orders">Orders</Link> },
+        {
+            key: 'sub-users',
+            icon: <UserOutlined />,
+            label: 'Users',
+            children: [
+                { key: '/users/all', label: <Link to="/users/all">All Users</Link> },
+                { key: '/users/customers', label: <Link to="/users/customers">Customers</Link> },
+                { key: '/users/store-owners', label: <Link to="/users/store-owners">Store Owners</Link> },
+                { key: '/users/delivery', label: <Link to="/users/delivery">Delivery Guys</Link> },
+                { key: '/users/staff', label: <Link to="/users/staff">Staff</Link> },
+                { key: '/users/roles', label: <Link to="/users/roles">Roles & Permissions</Link> },
+            ]
+        },
+        {
+            key: 'sub-orders',
+            icon: <ShoppingCartOutlined />,
+            label: 'Orders',
+            children: [
+                { key: '/orders/all', label: <Link to="/orders/all">All Orders</Link> },
+                { key: '/orders/live', label: <Link to="/orders/live">Live Orders</Link> },
+                { key: '/orders/scheduled', label: <Link to="/orders/scheduled">Scheduled</Link> },
+                { key: '/orders/cancelled', label: <Link to="/orders/cancelled">Cancelled</Link> },
+                { key: '/orders/refunds', label: <Link to="/orders/refunds">Refund Requests</Link> },
+                { key: '/orders/disputed', label: <Link to="/orders/disputed">Disputed</Link> },
+                { key: '/orders/cod', label: <Link to="/orders/cod">COD Orders</Link> },
+                { key: '/orders/high-value', label: <Link to="/orders/high-value">High Value</Link> },
+                { key: '/orders/fraud', label: <Link to="/orders/fraud">Fraud Flagged</Link> },
+            ]
+        },
         { key: '/transactions', icon: <TransactionOutlined />, label: <Link to="/transactions">Transactions</Link> },
         { key: '/promotions', icon: <TagOutlined />, label: <Link to="/promotions">Promotions</Link> },
         { key: '/reports', icon: <BarChartOutlined />, label: <Link to="/reports">Reports</Link> },

@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
 import {
-    Card, Table, Button, Input, Tag, Space, Typography, Badge, Modal,
-    Form, Select, Row, Col, Upload, InputNumber, message, Avatar, Switch, Tooltip, Tabs
+    Card, Table, Button, Input, Tag, Space, Typography, Modal,
+    Form, Select, Row, Col, Upload, InputNumber, message, Avatar, Tooltip
 } from 'antd';
 import {
     PlusOutlined, UploadOutlined, DownloadOutlined, ReloadOutlined,
-    EditOutlined, SearchOutlined, InboxOutlined, ExclamationCircleOutlined,
-    DeleteOutlined, EyeOutlined, PoweroffOutlined, AppstoreOutlined
+    SearchOutlined, InboxOutlined, ExclamationCircleOutlined,
+    DeleteOutlined, PoweroffOutlined, AppstoreOutlined
 } from '@ant-design/icons';
 import { useTheme } from '../../context/ThemeContext';
 
-const { Title, Text } = Typography;
+const { Text } = Typography;
 const { Option } = Select;
-const { TabPane } = Tabs;
 
 const mockCategories = [
     { key: '1', id: 1, name: 'Biryani', store: 'Buchi Biryani Point', image: 'https://i.pravatar.cc/40?img=1', createdBy: 'Admin', createdAt: '5 months ago', updatedAt: '2 months ago', status: true },
@@ -23,6 +22,15 @@ const mockCategories = [
     { key: '6', id: 6, name: 'Ice Creams', store: 'Sri Sai Ice-Cream & Juices', image: 'https://i.pravatar.cc/40?img=6', createdBy: 'Admin', createdAt: '6 months ago', updatedAt: '5 months ago', status: true },
     { key: '7', id: 7, name: 'Lassi', store: 'Lassi shop', image: 'https://i.pravatar.cc/40?img=7', createdBy: 'Store Owner', createdAt: '5 months ago', updatedAt: '2 months ago', status: true },
 ];
+
+const StatusTag = ({ val }) => (
+    <Tag style={{
+        border: `1px solid ${val ? '#b7eb8f' : '#ffa39e'}`,
+        color: val ? '#389e0d' : '#cf1322',
+        background: val ? '#f6ffed' : '#fff1f0',
+        borderRadius: 3, fontWeight: 600, padding: '1px 10px', fontSize: 12
+    }}>{val ? 'Active' : 'Inactive'}</Tag>
+);
 
 export const MenuCategories = () => {
     const { isDarkMode } = useTheme();
@@ -38,17 +46,9 @@ export const MenuCategories = () => {
         message.success('Status updated');
     };
 
-    const handleDelete = (id, name) => {
-        Modal.confirm({
-            title: `Delete category "${name}"?`,
-            icon: <ExclamationCircleOutlined />,
-            okText: 'Delete', okType: 'danger',
-            onOk: () => { setData(prev => prev.filter(d => d.id !== id)); message.success('Deleted.'); }
-        });
-    };
-
     const openEdit = (record) => { setEditingRecord(record); form.setFieldsValue(record); setIsModalOpen(true); };
     const openAdd = () => { setEditingRecord(null); form.resetFields(); setIsModalOpen(true); };
+
     const handleSave = () => {
         form.validateFields().then(vals => {
             if (editingRecord) {
@@ -69,19 +69,11 @@ export const MenuCategories = () => {
     );
 
     const columns = [
-        {
-            title: 'ID', dataIndex: 'id', key: 'id', width: 60,
-            sorter: (a, b) => a.id - b.id,
-        },
+        { title: 'ID', dataIndex: 'id', key: 'id', width: 60, sorter: (a, b) => a.id - b.id },
         {
             title: 'Name', dataIndex: 'name', key: 'name',
             render: (text, record) => (
-                <Text
-                    style={{ color: '#1890ff', cursor: 'pointer', fontWeight: 500 }}
-                    onClick={() => openEdit(record)}
-                >
-                    {text}
-                </Text>
+                <Text style={{ color: '#1890ff', cursor: 'pointer', fontWeight: 500 }} onClick={() => openEdit(record)}>{text}</Text>
             )
         },
         {
@@ -95,47 +87,20 @@ export const MenuCategories = () => {
                 : <Avatar shape="square" size={36} icon={<AppstoreOutlined />} style={{ background: '#f0f0f0', color: '#bfbfbf' }} />
         },
         { title: 'Created By', dataIndex: 'createdBy', key: 'createdBy', render: t => <Text type="secondary">{t}</Text> },
-        {
-            title: 'Created At', dataIndex: 'createdAt', key: 'createdAt', sorter: true,
-            render: t => <Text type="secondary" style={{ fontSize: 13 }}>{t}</Text>
-        },
-        {
-            title: 'Updated At', dataIndex: 'updatedAt', key: 'updatedAt',
-            render: t => <Text type="secondary" style={{ fontSize: 13 }}>{t}</Text>
-        },
-        {
-            title: 'Status', dataIndex: 'status', key: 'status', width: 95,
-            render: val => (
-                <Tag style={{
-                    border: `1px solid ${val ? '#b7eb8f' : '#ffa39e'}`,
-                    color: val ? '#389e0d' : '#cf1322',
-                    background: val ? '#f6ffed' : '#fff1f0',
-                    borderRadius: 3, fontWeight: 600, padding: '1px 10px', fontSize: 12
-                }}>
-                    {val ? 'Active' : 'Inactive'}
-                </Tag>
-            )
-        },
+        { title: 'Created At', dataIndex: 'createdAt', key: 'createdAt', render: t => <Text type="secondary" style={{ fontSize: 13 }}>{t}</Text> },
+        { title: 'Updated At', dataIndex: 'updatedAt', key: 'updatedAt', render: t => <Text type="secondary" style={{ fontSize: 13 }}>{t}</Text> },
+        { title: 'Status', dataIndex: 'status', key: 'status', width: 95, render: val => <StatusTag val={val} /> },
         {
             title: '', key: 'actions', width: 155,
             render: (_, record) => (
                 <Space size={4}>
                     <Button size="small" style={{ background: '#1890ff', borderColor: '#1890ff', color: '#fff', borderRadius: 4, fontWeight: 600, fontSize: 12 }}
                         onClick={() => message.info(`Viewing ${record.name}`)}>View</Button>
-                    <Button size="small" style={{
-                        background: isDarkMode ? '#262626' : '#f0f0f0',
-                        borderColor: isDarkMode ? '#434343' : '#d9d9d9',
-                        color: isDarkMode ? '#d9d9d9' : '#595959',
-                        borderRadius: 4, fontWeight: 600, fontSize: 12
-                    }} onClick={() => openEdit(record)}>Edit</Button>
+                    <Button size="small" style={{ background: isDarkMode ? '#262626' : '#f0f0f0', borderColor: isDarkMode ? '#434343' : '#d9d9d9', color: isDarkMode ? '#d9d9d9' : '#595959', borderRadius: 4, fontWeight: 600, fontSize: 12 }}
+                        onClick={() => openEdit(record)}>Edit</Button>
                     <Tooltip title={record.status ? 'Deactivate' : 'Activate'}>
-                        <Button size="small" icon={<PoweroffOutlined />}
-                            onClick={() => handleToggle(record.id)}
-                            style={{
-                                background: record.status ? '#52c41a' : '#ff4d4f',
-                                borderColor: record.status ? '#52c41a' : '#ff4d4f',
-                                color: '#fff', borderRadius: 4, padding: '0 8px'
-                            }}
+                        <Button size="small" icon={<PoweroffOutlined />} onClick={() => handleToggle(record.id)}
+                            style={{ background: record.status ? '#52c41a' : '#ff4d4f', borderColor: record.status ? '#52c41a' : '#ff4d4f', color: '#fff', borderRadius: 4, padding: '0 8px' }}
                         />
                     </Tooltip>
                 </Space>
@@ -144,6 +109,7 @@ export const MenuCategories = () => {
     ];
 
     const cardBg = { borderRadius: 8, border: 'none', boxShadow: isDarkMode ? '0 1px 4px rgba(0,0,0,0.3)' : '0 1px 4px rgba(0,0,0,0.06)' };
+    const borderStyle = isDarkMode ? '1px solid #303030' : '1px solid #f0f0f0';
 
     return (
         <div style={{ paddingBottom: 24 }}>
@@ -156,14 +122,10 @@ export const MenuCategories = () => {
                     </Tooltip>
                     <Text style={{ fontWeight: 700, fontSize: 15 }}>{data.length} Categories</Text>
                 </Space>
-
                 <Space wrap size={8}>
-                    <Input
-                        placeholder="Search..."
-                        prefix={<SearchOutlined style={{ color: '#bfbfbf' }} />}
+                    <Input placeholder="Search..." prefix={<SearchOutlined style={{ color: '#bfbfbf' }} />}
                         style={{ width: 220, borderRadius: 6, background: isDarkMode ? '#1f1f1f' : '#f5f5f5', border: 'none' }}
-                        value={searchText} onChange={e => setSearchText(e.target.value)} allowClear
-                    />
+                        value={searchText} onChange={e => setSearchText(e.target.value)} allowClear />
                     <Button icon={<DownloadOutlined />} style={{ background: '#e6f4ff', borderColor: '#91caff', color: '#0958d9' }}>Export CSV</Button>
                     <Button icon={<UploadOutlined />}>Bulk Import</Button>
                     <Button icon={<ReloadOutlined />} onClick={() => setSearchText('')} />
@@ -171,7 +133,6 @@ export const MenuCategories = () => {
                 </Space>
             </div>
 
-            {/* Bulk Action Bar */}
             {selectedRowKeys.length > 0 && (
                 <div style={{ marginBottom: 12, padding: '10px 20px', background: '#e6f4ff', borderRadius: 8, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Text strong style={{ color: '#0958d9' }}>{selectedRowKeys.length} selected</Text>
@@ -186,18 +147,16 @@ export const MenuCategories = () => {
             <Card style={cardBg} bodyStyle={{ padding: 0 }}>
                 <Table
                     rowSelection={{ selectedRowKeys, onChange: keys => setSelectedRowKeys(keys) }}
-                    columns={columns}
-                    dataSource={filtered}
+                    columns={columns} dataSource={filtered}
                     pagination={{ defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '25', '50', '100'], showTotal: (t, r) => `Showing ${r[0]}-${r[1]} of ${t}` }}
-                    scroll={{ x: 1000 }}
-                    rowHoverable size="middle"
+                    scroll={{ x: 1000 }} rowHoverable size="middle"
                 />
             </Card>
 
             {/* Add/Edit Modal */}
             <Modal
                 title={<Space><AppstoreOutlined style={{ color: '#1890ff' }} /><Text strong>{editingRecord ? 'Edit Category' : 'Add New Category'}</Text></Space>}
-                open={isModalOpen} onCancel={() => setIsModalOpen(false)} width={700}
+                open={isModalOpen} onCancel={() => setIsModalOpen(false)} width={680}
                 footer={[
                     <Button key="cancel" onClick={() => setIsModalOpen(false)}>Cancel</Button>,
                     <Button key="save" type="primary" onClick={handleSave}>{editingRecord ? 'Update' : 'Create'}</Button>
@@ -218,7 +177,8 @@ export const MenuCategories = () => {
                         <Col span={12}>
                             <Form.Item label="Store" name="store" rules={[{ required: true }]}>
                                 <Select placeholder="Select Store">
-                                    {['Buchi Biryani Point', 'Apsara Badam Milk', 'Cool & Spicy', 'Lassi shop', 'Sri Sai Ice-Cream & Juices'].map(s => <Option key={s} value={s}>{s}</Option>)}
+                                    {['Buchi Biryani Point', 'Apsara Badam Milk', 'Cool & Spicy', 'Lassi shop', 'Sri Sai Ice-Cream & Juices'].map(s =>
+                                        <Option key={s} value={s}>{s}</Option>)}
                                 </Select>
                             </Form.Item>
                         </Col>
