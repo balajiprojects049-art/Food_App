@@ -21,6 +21,9 @@ import { Reports } from './pages/transactions/Reports';
 import { PromoSliders, StoreCategorySlider } from './pages/promotions/PromoSliders';
 import { Coupons, Rewards, RewardClaims } from './pages/promotions/Coupons';
 import { Pages, SendNotifications } from './pages/promotions/PagesAndNotifications';
+import { ModulesPage, StoreTypes } from './pages/modules/ModulesPage';
+import { PickupDropSettings, DeliveryTimeSlots, DeliveryRadiusSchedules, PayoutSchedules } from './pages/modules/Schedules';
+import { Utilities, CustomDeliverySettings } from './pages/modules/UtilitiesAndDelivery';
 
 // Placeholder Pages
 const PlaceholderPage = ({ title }) => (
@@ -71,6 +74,14 @@ function App() {
             <Route path="promotions/reward-claims" element={<RewardClaims />} />
             <Route path="promotions/pages" element={<Pages />} />
             <Route path="promotions/notifications" element={<SendNotifications />} />
+            <Route path="modules/list" element={<ModulesPage />} />
+            <Route path="modules/pickup-drop" element={<PickupDropSettings />} />
+            <Route path="modules/time-slots" element={<DeliveryTimeSlots />} />
+            <Route path="modules/radius-schedules" element={<DeliveryRadiusSchedules />} />
+            <Route path="modules/payout-schedules" element={<PayoutSchedules />} />
+            <Route path="modules/store-types" element={<StoreTypes />} />
+            <Route path="modules/utilities" element={<Utilities />} />
+            <Route path="modules/delivery-settings" element={<CustomDeliverySettings />} />
             <Route path="settings" element={<PlaceholderPage title="System Settings" />} />
             <Route path="logout" element={<PlaceholderPage title="Logging Out..." />} />
           </Route>

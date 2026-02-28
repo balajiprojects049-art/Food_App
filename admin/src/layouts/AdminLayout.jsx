@@ -5,7 +5,7 @@ import {
     ShoppingCartOutlined, TransactionOutlined, TagOutlined, BarChartOutlined,
     SettingOutlined, LogoutOutlined, BellOutlined, SearchOutlined,
     MenuUnfoldOutlined, MenuFoldOutlined, GlobalOutlined, SunOutlined, MoonOutlined,
-    TeamOutlined, SafetyOutlined, UserSwitchOutlined
+    TeamOutlined, SafetyOutlined, UserSwitchOutlined, AppstoreOutlined
 } from '@ant-design/icons';
 import { useTheme } from '../context/ThemeContext';
 import { Link, Outlet, useLocation } from 'react-router-dom';
@@ -88,6 +88,21 @@ export const AdminLayout = () => {
             ]
         },
         { key: '/reports', icon: <BarChartOutlined />, label: <Link to="/reports">Reports</Link> },
+        {
+            key: 'sub-modules',
+            icon: <AppstoreOutlined />,
+            label: 'Modules',
+            children: [
+                { key: '/modules/list', label: <Link to="/modules/list">Modules</Link> },
+                { key: '/modules/pickup-drop', label: <Link to="/modules/pickup-drop">Pickup &amp; Drop Settings</Link> },
+                { key: '/modules/time-slots', label: <Link to="/modules/time-slots">Delivery Time Slots</Link> },
+                { key: '/modules/radius-schedules', label: <Link to="/modules/radius-schedules">Delivery Radius Schedules</Link> },
+                { key: '/modules/payout-schedules', label: <Link to="/modules/payout-schedules">Payout Schedules</Link> },
+                { key: '/modules/store-types', label: <Link to="/modules/store-types">Store Types</Link> },
+                { key: '/modules/utilities', label: <Link to="/modules/utilities">Utilities</Link> },
+                { key: '/modules/delivery-settings', label: <Link to="/modules/delivery-settings">Custom Delivery Settings</Link> },
+            ]
+        },
         { key: '/settings', icon: <SettingOutlined />, label: <Link to="/settings">Settings</Link> },
         { type: 'divider' },
         { key: '/logout', icon: <LogoutOutlined />, label: 'Logout', danger: true },
