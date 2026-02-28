@@ -73,7 +73,20 @@ export const AdminLayout = () => {
                 { key: '/transactions/reports', label: <Link to="/transactions/reports">Reports</Link> },
             ]
         },
-        { key: '/promotions', icon: <TagOutlined />, label: <Link to="/promotions">Promotions</Link> },
+        {
+            key: 'sub-promotions',
+            icon: <TagOutlined />,
+            label: 'Promotions',
+            children: [
+                { key: '/promotions/sliders', label: <Link to="/promotions/sliders">Promo Sliders</Link> },
+                { key: '/promotions/category-slider', label: <Link to="/promotions/category-slider">Store Category Slider</Link> },
+                { key: '/promotions/coupons', label: <Link to="/promotions/coupons">Coupons</Link> },
+                { key: '/promotions/rewards', label: <Link to="/promotions/rewards">Rewards</Link> },
+                { key: '/promotions/reward-claims', label: <Link to="/promotions/reward-claims">Reward Claims</Link> },
+                { key: '/promotions/pages', label: <Link to="/promotions/pages">Pages</Link> },
+                { key: '/promotions/notifications', label: <Link to="/promotions/notifications">Send Push Notifications</Link> },
+            ]
+        },
         { key: '/reports', icon: <BarChartOutlined />, label: <Link to="/reports">Reports</Link> },
         { key: '/settings', icon: <SettingOutlined />, label: <Link to="/settings">Settings</Link> },
         { type: 'divider' },
