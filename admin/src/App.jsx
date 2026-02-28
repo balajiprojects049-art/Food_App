@@ -14,6 +14,10 @@ import { Customers, StoreOwners, DeliveryGuys, Staff } from './pages/users/Filte
 import { RolesPermissions } from './pages/users/RolesPermissions';
 import { AllOrders, CancelledOrders, RefundRequests, DisputedOrders, CODOrders, HighValueOrders, FraudFlaggedOrders, ScheduledOrders } from './pages/orders/AllOrders';
 import { LiveOrders } from './pages/orders/LiveOrders';
+import { StorePayouts } from './pages/transactions/StorePayouts';
+import { DeliveryCollections, DeliveryCollectionLogs } from './pages/transactions/DeliveryCollections';
+import { WalletTransactions } from './pages/transactions/WalletTransactions';
+import { Reports } from './pages/transactions/Reports';
 
 // Placeholder Pages
 const PlaceholderPage = ({ title }) => (
@@ -52,7 +56,11 @@ function App() {
             <Route path="orders/cod" element={<CODOrders />} />
             <Route path="orders/high-value" element={<HighValueOrders />} />
             <Route path="orders/fraud" element={<FraudFlaggedOrders />} />
-            <Route path="promotions" element={<PlaceholderPage title="Promotions" />} />
+            <Route path="transactions/payouts" element={<StorePayouts />} />
+            <Route path="transactions/collections" element={<DeliveryCollections />} />
+            <Route path="transactions/logs" element={<DeliveryCollectionLogs />} />
+            <Route path="transactions/wallet" element={<WalletTransactions />} />
+            <Route path="transactions/reports" element={<Reports />} />
             <Route path="reports" element={<PlaceholderPage title="Analytics Reports" />} />
             <Route path="settings" element={<PlaceholderPage title="System Settings" />} />
             <Route path="logout" element={<PlaceholderPage title="Logging Out..." />} />

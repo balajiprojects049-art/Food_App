@@ -61,7 +61,18 @@ export const AdminLayout = () => {
                 { key: '/orders/fraud', label: <Link to="/orders/fraud">Fraud Flagged</Link> },
             ]
         },
-        { key: '/transactions', icon: <TransactionOutlined />, label: <Link to="/transactions">Transactions</Link> },
+        {
+            key: 'sub-transactions',
+            icon: <TransactionOutlined />,
+            label: 'Transactions',
+            children: [
+                { key: '/transactions/payouts', label: <Link to="/transactions/payouts">Store Payouts</Link> },
+                { key: '/transactions/collections', label: <Link to="/transactions/collections">Delivery Collections</Link> },
+                { key: '/transactions/logs', label: <Link to="/transactions/logs">Collection Logs</Link> },
+                { key: '/transactions/wallet', label: <Link to="/transactions/wallet">Wallet Transactions</Link> },
+                { key: '/transactions/reports', label: <Link to="/transactions/reports">Reports</Link> },
+            ]
+        },
         { key: '/promotions', icon: <TagOutlined />, label: <Link to="/promotions">Promotions</Link> },
         { key: '/reports', icon: <BarChartOutlined />, label: <Link to="/reports">Reports</Link> },
         { key: '/settings', icon: <SettingOutlined />, label: <Link to="/settings">Settings</Link> },
