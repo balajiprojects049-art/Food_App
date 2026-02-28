@@ -8,6 +8,7 @@ import {
     TeamOutlined, SafetyOutlined, UserSwitchOutlined, AppstoreOutlined
 } from '@ant-design/icons';
 import { useTheme } from '../context/ThemeContext';
+import { useAuth } from '../context/AuthContext';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 
 const { Header, Sider, Content } = Layout;
@@ -15,7 +16,24 @@ const { Header, Sider, Content } = Layout;
 export const AdminLayout = () => {
     const [collapsed, setCollapsed] = useState(false);
     const { isDarkMode, toggleTheme } = useTheme();
+    const { user, logout } = useAuth();
     const location = useLocation();
+
+    const handleLogout = () => {
+        logout();
+    };
+
+    const userDropdownItems = [
+        { key: 'profile', label: 'My Profile' },
+        { key: 'settings', label: <Link to="/settings">Settings</Link> },
+        { type: 'divider' },
+        {
+            key: 'logout',
+            label: 'Logout',
+            danger: true,
+            onClick: handleLogout
+        }
+    ];
 
     const menuItems = [
         { key: '/', icon: <DashboardOutlined />, label: <Link to="/">Dashboard</Link> },
@@ -208,19 +226,20 @@ export const AdminLayout = () => {
                         </Badge>
 
                         <Dropdown
-                            menu={{
-                                items: [
-                                    { key: '1', label: 'My Profile' },
-                                    { key: '2', label: 'Settings' },
-                                    { type: 'divider' },
-                                    { key: '3', label: 'Logout' }
-                                ]
-                            }}
+                            menu={{ items: userDropdownItems }}
                             placement="bottomRight"
                         >
                             <Space style={{ cursor: 'pointer', paddingLeft: '8px' }}>
-                                <Avatar src="https://i.pravatar.cc/150?img=11" />
-                                <span style={{ color: isDarkMode ? '#fff' : '#000', fontWeight: 500 }}>Admin User</span>
+                                <Avatar
+                                    style={{ backgroundColor: '#1890ff', verticalAlign: 'middle' }}
+                                    size="medium"
+                                >
+                                    {user?.avatar || 'A'}
+                                </Avatar>
+                                <div style={{ display: 'flex', flexDirection: 'column', lineHeight: '1.2' }}>
+                                    <span style={{ color: isDarkMode ? '#fff' : '#000', fontWeight: 600 }}>{user?.name || 'Admin User'}</span>
+                                    <span style={{ color: '#8c8c8c', fontSize: '11px' }}>{user?.role || 'Super Admin'}</span>
+                                </div>
                             </Space>
                         </Dropdown>
                     </div>
