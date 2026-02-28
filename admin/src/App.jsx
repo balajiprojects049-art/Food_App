@@ -4,6 +4,11 @@ import { ThemeProvider } from './context/ThemeContext';
 import { AdminLayout } from './layouts/AdminLayout';
 import { Dashboard } from './pages/Dashboard';
 import { Stores } from './pages/Stores';
+import { MenuCategories } from './pages/menu/MenuCategories';
+import { Items } from './pages/menu/Items';
+import { SubCategories } from './pages/menu/SubCategories';
+import { ItemAttributes } from './pages/menu/ItemAttributes';
+import { ItemSchedule } from './pages/menu/ItemSchedule';
 
 // Placeholder Pages
 const PlaceholderPage = ({ title }) => (
@@ -20,7 +25,11 @@ function App() {
           <Route path="/" element={<AdminLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="stores" element={<Stores />} />
-            <Route path="menu" element={<PlaceholderPage title="Menu & Items" />} />
+            <Route path="menu/categories" element={<MenuCategories />} />
+            <Route path="menu/items" element={<Items />} />
+            <Route path="menu/sub-categories" element={<SubCategories />} />
+            <Route path="menu/attributes" element={<ItemAttributes />} />
+            <Route path="menu/schedule" element={<ItemSchedule />} />
             <Route path="users" element={<PlaceholderPage title="User Management" />} />
             <Route path="partners" element={<PlaceholderPage title="Delivery Partners" />} />
             <Route path="orders" element={<PlaceholderPage title="Orders History" />} />

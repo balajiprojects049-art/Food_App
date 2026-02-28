@@ -33,7 +33,18 @@ export const AdminLayout = () => {
     const menuItems = [
         { key: '/', icon: <DashboardOutlined />, label: <Link to="/">Dashboard</Link> },
         { key: '/stores', icon: <ShopOutlined />, label: <Link to="/stores">Stores</Link> },
-        { key: '/menu', icon: <MenuOutlined />, label: <Link to="/menu">Menu & Items</Link> },
+        {
+            key: 'sub-menu',
+            icon: <MenuOutlined />,
+            label: 'Items & Menu',
+            children: [
+                { key: '/menu/categories', label: <Link to="/menu/categories">Menu Categories</Link> },
+                { key: '/menu/items', label: <Link to="/menu/items">Items</Link> },
+                { key: '/menu/sub-categories', label: <Link to="/menu/sub-categories">Sub Categories</Link> },
+                { key: '/menu/attributes', label: <Link to="/menu/attributes">Item Attributes</Link> },
+                { key: '/menu/schedule', label: <Link to="/menu/schedule">Item Schedule</Link> },
+            ]
+        },
         { key: '/users', icon: <UserOutlined />, label: <Link to="/users">Users</Link> },
         { key: '/partners', icon: <CarOutlined />, label: <Link to="/partners">Delivery Partners</Link> },
         { key: '/orders', icon: <ShoppingCartOutlined />, label: <Link to="/orders">Orders</Link> },
